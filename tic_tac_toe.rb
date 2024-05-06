@@ -91,7 +91,7 @@ class TicTacToe
 
       winner = i.even? ? 'CROSS' : 'CIRCLE'
       puts "SIRE #{winner} IS OUR VICTOR"
-      puts 'Please collect yours head of thy enemy'
+      puts 'Please collect the head of thy enemy'
       break
     end
     puts 'Look like a tie my good sirs!' unless winner?
