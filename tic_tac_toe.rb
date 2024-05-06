@@ -1,13 +1,16 @@
 class TicTacToe
 
-  attr_reader :board
-
   def initialize
     @board = Array.new(3) { Array.new(3, " ") }
     brain
   end
 
   private
+
+  attr_accessor :board
+
+  class RowFullError < ::StandardError
+  end
 
   def print_state
     acc = "    1   2   3\n"
@@ -19,6 +22,11 @@ class TicTacToe
     puts acc
   end
 
+  def row_full?(row)
+    return false if board[row].any? { |space| space == " " }
+    true
+  end
+
   def player_input(player)
 
     puts "May the honorable sir #{player} approach the table!"
@@ -27,13 +35,15 @@ class TicTacToe
       puts "What ROW do you wish to challenge?"
       row = Integer(gets())
       raise RangeError if row < 1 || row > 3
+      raise RowFullError if row_full?(row-1)
     rescue RangeError
-      puts "What a cheat. Stay within the bounds you scoundrel!"
-      puts "\nLets try this again"
+      puts "### What a cheat. Stay within the bounds you scoundrel!"
       retry
     rescue ArgumentError
-      puts "Blasphemer! Digit, give us a digit!"
-      puts "\nLets try this again"
+      puts "### Blasphemer! Digit, give us a digit!"
+      retry
+    rescue RowFullError
+      puts "### Im afraid that ROW is way too crowded, choose another!"
       retry
     end
 
@@ -42,12 +52,10 @@ class TicTacToe
       column = Integer(gets())
       raise RangeError if column < 1 || column > 3
     rescue RangeError
-      puts "What a cheat. Stay within the bounds you scoundrel!"
-      puts "\nLets try this again"
+      puts "### What a cheat. Stay within the bounds you scoundrel!"
       retry
     rescue ArgumentError
-      puts "Blasphemer! Digit, give us a digit!"
-      puts "\nLets try this again"
+      puts "### Blasphemer! Digit, give us a digit!"
       retry
     end
 
@@ -63,6 +71,14 @@ class TicTacToe
     end
   end
 
+  def winner?
+    return true if board.any? { |row| row[0] == row[1] && row[1] == row[2] && row[0] != " " }
+    return true if board.transpose.any? { |row| row[0] == row[1] && row[1] == row[2] && row[0] != " " }
+    return true if board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[1][1] != " " 
+    return true if board[2][0] == board[1][1] && board[1][1] == board[0][2] && board[1][1] != " " 
+    false
+  end
+
   def brain
     puts "\nTwo challengers dare to approach the colloseum of Tic of the Toe? The Tac?"
     puts "Very well. Let the duel begin!"
@@ -75,12 +91,13 @@ class TicTacToe
           i.even? ? winner = "CROSS" : winner = "CIRCLE"
           puts "SIRE #{winner} IS OUR VICTOR"
           puts "Please collect yours head of thy enemy"
+          break
         end
       end
     end
     puts "Look like a tie my good sirs!" if !winner?
     puts "Care for a rematch? [y/N]"
-    brain if gets().chr.downcase == "y"
+    initialize if gets().chr.downcase == "y"
   end
 
 end
