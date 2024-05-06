@@ -12,12 +12,13 @@ class TicTacToe
   end
 
   def print_state
-    acc = "    1   2   3\n"
+    acc = "\n    1   2   3\n"
     acc += "  +---+---+---+\n"
     board.each.with_index do |row, index|
       acc += "#{index + 1} | #{row[0]} | #{row[1]} | #{row[2]} |\n"
       acc += "  +---+---+---+\n"
     end
+    acc += "\n"
     puts acc
   end
 
@@ -63,7 +64,7 @@ class TicTacToe
                                      'O'
                                    end
     else
-      puts "Thou can't change whats done!"
+      puts "### Thou can't change whats done!"
       player_input(player)
     end
   end
