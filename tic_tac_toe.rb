@@ -29,8 +29,6 @@ class TicTacToe
 
   def player_input(player)
 
-    puts "May the honorable sir #{player} approach the table!"
-
     begin
       puts "What ROW do you wish to challenge?"
       row = Integer(gets())
@@ -84,7 +82,9 @@ class TicTacToe
     puts "Very well. Let the duel begin!"
     print_state
     for i in 0..8
-      i.even? ? player_input("Cross") : player_input("Circle")
+      i.even? ? player = "Cross" : player = "Circle"
+      puts "May the honorable sir #{player} approach the table!"
+      player_input(player)
       print_state
       if i > 3
         if winner?
