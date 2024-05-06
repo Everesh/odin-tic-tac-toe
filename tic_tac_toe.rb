@@ -64,10 +64,25 @@ class TicTacToe
   end
 
   def brain
-    
-  # TO DO
-
+    puts "\nTwo challengers dare to approach the colloseum of Tic of the Toe? The Tac?"
+    puts "Very well. Let the duel begin!"
+    print_state
+    for i in 0..8
+      i.even? ? player_input("Cross") : player_input("Circle")
+      print_state
+      if i > 3
+        if winner?
+          i.even? ? winner = "CROSS" : winner = "CIRCLE"
+          puts "SIRE #{winner} IS OUR VICTOR"
+          puts "Please collect yours head of thy enemy"
+        end
+      end
+    end
+    puts "Look like a tie my good sirs!" if !winner?
+    puts "Care for a rematch? [y/N]"
+    brain if gets().chr.downcase == "y"
   end
+
 end
 
 game = TicTacToe.new
