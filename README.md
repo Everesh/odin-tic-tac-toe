@@ -14,7 +14,7 @@ This project is a simple implementation of the classic Tic-Tac-Toe game where tw
 
 ## How to Play
 
-1. **Start the Game:** Run the game using `ruby tic_tac_toe.rb`.
+1. **Start the Game:** Run the game using `ruby play.rb`.
 2. **Gameplay:**
    - Players take turns to input their move by entering the row and column number.
    - The game will update the board and display it after each move.
@@ -30,9 +30,9 @@ This project is a simple implementation of the classic Tic-Tac-Toe game where tw
    ```
 3. Navigate to the project directory:
    ```bash
-   cd odin-tic-tac-toe
+   cd odin-tic-tac-toe/lib
    ```
 4. Run the game:
    ```bash
-   ruby tic_tac_toe.rb
+   ruby play.rb
    ```
