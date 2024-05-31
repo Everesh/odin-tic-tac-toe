@@ -24,5 +24,25 @@ describe TicTacToe do
         expect(game.winner?).to be true
       end
     end
+    context 'when 3 same in column' do
+        it 'first column returns true' do
+          allow(game).to receive(:board).and_return([['O', ' ', 'O'],
+                                                     ['O', 'X', 'X'],
+                                                     ['O', 'X', 'X']])
+          expect(game.winner?).to be true
+        end
+        it 'second column returns true' do
+          allow(game).to receive(:board).and_return([[' ', 'X', 'O'],
+                                                     ['X', 'X', 'O'],
+                                                     ['O', 'X', ' ']])
+          expect(game.winner?).to be true
+        end
+        it 'third column returns true' do
+          allow(game).to receive(:board).and_return([['X', 'X', 'O'],
+                                                     ['X', ' ', 'O'],
+                                                     ['O', 'X', 'O']])
+          expect(game.winner?).to be true
+        end
+      end
   end
 end
