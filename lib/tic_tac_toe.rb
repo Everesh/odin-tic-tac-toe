@@ -1,4 +1,6 @@
 class TicTacToe
+  attr_accessor :board
+
   def initialize
     @board = Array.new(3) { Array.new(3, ' ') }
   end
@@ -6,10 +8,6 @@ class TicTacToe
   def play
     brain
   end
-
-  private
-
-  attr_accessor :board
 
   class RowFullError < ::StandardError
   end
@@ -99,8 +97,10 @@ class TicTacToe
     end
     puts 'Look like a tie my good sirs!' unless winner?
     puts 'Care for a rematch? [y/N]'
-    initialize if gets.chr.downcase == 'y'
+    if gets.chr.downcase == 'y'
+      initialize
+      play
+    end
   end
 end
 
-TicTacToe.new
