@@ -4,7 +4,7 @@ describe TicTacToe do
   subject(:game) { described_class.new }
 
   describe '#winner?' do
-    context 'when 3 in row' do
+    context 'when 3 same in row' do
       it 'first row returns true' do
         allow(game).to receive(:board).and_return([['O', 'O', 'O'],
                                                    ['X', 'X', ' '],
